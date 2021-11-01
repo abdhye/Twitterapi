@@ -1,0 +1,255 @@
+<!-- <h1>
+    Hello Twitter API...
+</h1> -->
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            overflow: scroll;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .slct-count-col {
+            display: flex;
+            flex-direction: row-reverse;
+        }
+
+        .count-input {
+            width: 62%;
+            height: 42px;
+            margin-left: 28px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid grey;
+        }
+
+        .srchbtn-col {
+            padding-left: 0px;
+            padding-right: 0px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        form.example .srch-input[type=search] {
+            padding: 10px;
+            margin-right: 5px;
+            margin-left: 5%;
+            font-size: 17px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            float: left;
+            width: 50%;
+            height: 42px;
+            background: #f1f1f1;
+        }
+
+        form.example .srch-btn {
+            float: left;
+            width: 10%;
+            height: 42px;
+            font-size: 20px;
+            border-radius: 5px;
+            border-left: none;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        form.example::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .custom-select {
+            max-width: 60%;
+            height: 43px;
+            border-radius: 5px;
+            border: 1px solid grey;
+            height: 42px;
+        }
+
+        .mb-3 {
+            justify-content: end;
+        }
+
+        .slct-prj {
+            width: 40%;
+        }
+
+        .card-col {
+            max-width: 48%;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        img.card-img-top {
+            width: 75px;
+            border-radius: 50%;
+        }
+
+        .usr-name {
+            margin-left: 5px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            margin-bottom: 1.6px;
+        }
+
+        .card-subtitle {
+            margin-bottom: 2px;
+        }
+
+        .text-muted {
+            font-size: 0.8rem;
+        }
+
+        p.card-text {
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- example search box1 starts here -->
+
+    <form class="example" method="post" action="{% url 'search-twt' %}">
+        <div class="row">
+            {% csrf_token %}
+            <div class="col-4 slct-count-col" style="padding-right: 5px;">
+                <input class="count-input" type="number" min="1" max="50" placeholder="No. of tweets(max 50)" value="4"
+                    name="twtcount">
+                <div class="input-group mb-3">
+                    <select class="custom-select" id="inputGroupSelect02" name="filter">
+                        <option value="mixed">Mixed</option>
+                        <option value="recent">Recent</option>
+                        <option value="popular">Popular</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6 srchbtn-col">
+                <input class="srch-input" type="search" placeholder="Search Tweets.." name="searched">
+                <button class="btn btn-primary srch-btn" type="submit"><i class="fa fa-search"></i></button>
+                <div class="input-group slct-prj">
+                    <select class="custom-select" id="inputGroupSelect03" name="project">
+                        <option value="mixed">Project A</option>
+                        <option value="recent">Project B</option>
+                        <option value="popular">Project C</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- example search box1 ends here -->
+
+    {% if searched %}
+
+    <h2>
+        Search Results For {{searched}}:
+        <br>
+    </h2>
+
+    <div class="row" style="padding: 10px">
+        {% for item in data %}
+
+        <div class="col-6 card-col" style="padding: 10px 0px 2px 15px">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <a href="https://twitter.com/{{item.user.screen_name}}/photo">
+                            <img class="card-img-top" src="{{item.user.profile_image_url}}">
+                        </a>
+                        <div class="usr-name">
+                            <h4 class="card-title">{{ item.user.name }}
+                            </h4>
+                            <a href="https://twitter.com/{{item.user.screen_name}}" class="card-subtitle text-muted">
+                                @{{ item.user.screen_name }}</a> <br>
+                            <a href="https://twitter.com/{{item.user.screen_name}}/following"
+                                class="text-muted">{{item.user.friends_count}} <b>Following</b></a>
+                            <a href="https://twitter.com/{{item.user.screen_name}}/followers"
+                                class="text-muted">{{item.user.followers_count}} <b>Followers</b></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="card-text"><b>Tweet:</b> {{ item.text }}</p>
+                    </div>
+                    <div class="row">
+                        <p><b>Tweeted At:</b> {{day}} {{month}} {{year}} {{time}}</p>
+                    </div>
+                    <div class="row">
+                        <a href="https://twitter.com/{{item.user.screen_name}}/status/{{item.id}}"
+                            class="btn btn-primary">See Tweet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+
+    {% else %}
+
+    <!-- <h2>
+        You Forgot To Type What To Search!!!
+    </h2> -->
+
+    {% endif %}
+
+</body>
+
+
+<!-- example search box2 starts here -->
+
+<!-- <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        input[type=text] {
+            width: 130px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        input[type=text]:focus {
+            width: 95%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form>
+        <i class="fa fa-search"></i> <input type="text" name="search" placeholder="Search Tweet..">
+    </form>
+
+</body> -->
+
+<!-- example search box1 ends here -->
