@@ -45,17 +45,19 @@ def search_twt(request):
         searched = request.POST['searched']
         if searched == '':
             return render(request, 'ifnot_searched.html')
-        cryptop = request.POST.get('cryptop', False)
+        cryptop = request.POST.getlist('cryptop', False)
         twtcount = request.POST.get('twtcount', False)
         if twtcount == '':
             return render(request, 'ifnot_count.html')
         filter = request.POST['filter']
-        print(request.POST)
-        print(cryptop)
         if cryptop == False:
             search = searched
         else:
-            search = searched + ' ' + cryptop
+            for crypto in cryptop:
+                search = searched , crypto
+                print(search)
+        #print(request.POST)
+        #print(cryptop)
         parameters = {'q': search,
                       'result_type': filter,
                       'count': twtcount}
