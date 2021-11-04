@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.utils.datastructures import MultiValueDictKeyError
 import base64
 import requests
-import re
 
 
 client_key = 'ljkFvgv4WCo7M0CD2XTgEwlhs'  # your key
@@ -46,23 +45,30 @@ def search_twt(request):
         searched = request.POST['searched']
         if searched == '':
             return render(request, 'ifnot_searched.html')
-        # twtcount = request.POST['twtcount']
+        cryptop = request.POST.get('cryptop', False)
         twtcount = request.POST.get('twtcount', False)
         if twtcount == '':
             return render(request, 'ifnot_count.html')
         filter = request.POST['filter']
-        # print(request.POST)
-        parameters = {'q': searched,
+        print(request.POST)
+        print(cryptop)
+        if cryptop == False:
+            search = searched
+        else:
+            search = searched + ' ' + cryptop
+        parameters = {'q': search,
                       'result_type': filter,
                       'count': twtcount}
         response = requests.get(
             search_url, headers=search_headers, params=parameters)
         tweet = response.json()
-        dt = re.split(r"\s+", tweet['statuses'][0]['created_at'])
-        day, month, year, time = dt[2], dt[1], dt[5], dt[3]
-        print(day, month, year, time)
-        return render(request, 'home.html', {'searched': searched, 'data': tweet['statuses'], 'day': day, 'month': month, 'year': year,
-                                             'time': time})
+
+        return render(request, 'home.html', {'searched': searched, 'data': tweet['statuses']})
 
     else:
         return render(request, 'home.html')
+
+
+# dt = re.split(r"\s+", tweet['statuses'][0]['created_at'])
+# day, month, year, time = dt[2], dt[1], dt[5], dt[3]
+# print(day, month, year, time)
