@@ -50,17 +50,17 @@ def search_twt(request):
         if twtcount == '':
             return render(request, 'ifnot_count.html')
         filter = request.POST['filter']
+        search = ''
         if cryptop == False:
             search = searched
         else:
             for crypto in cryptop:
-                search = searched , crypto
-                print(search)
-        #print(request.POST)
-        #print(cryptop)
-        parameters = {'q': search,
+                search = search + '+' + crypto
+
+        parameters = {'q': searched + search,
                       'result_type': filter,
                       'count': twtcount}
+
         response = requests.get(
             search_url, headers=search_headers, params=parameters)
         tweet = response.json()
@@ -69,8 +69,3 @@ def search_twt(request):
 
     else:
         return render(request, 'home.html')
-
-
-# dt = re.split(r"\s+", tweet['statuses'][0]['created_at'])
-# day, month, year, time = dt[2], dt[1], dt[5], dt[3]
-# print(day, month, year, time)

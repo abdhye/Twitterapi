@@ -1,7 +1,3 @@
-<!-- <h1>
-    Hello Twitter API...
-</h1> -->
-
 <head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -157,13 +153,12 @@
 </head>
 
 <body>
-    <!-- example search box1 starts here -->
 
     <form class="example" method="post" action="{% url 'search-twt' %}">
         <div class="row">
             {% csrf_token %}
             <div class="col-4 slct-count-col" style="padding-right: 5px;">
-                <input class="count-input" type="number" min="1" max="50" placeholder="No. of tweets(max 50)" value="4"
+                <input class="count-input" type="number" min="1" max="50" placeholder="No. of tweets(max 50)" value="10"
                     name="twtcount">
                 <div class="input-group mb-3">
                     <select class="custom-select" id="inputGroupSelect02" name="filter">
@@ -222,7 +217,7 @@
 
                             });
                             */
-                            
+
                             $('.selectpicker').on('change', function () {
                                 var selected = []; //array to store value
                                 $(this).find("option:selected").each(function (key, value) {
@@ -242,8 +237,6 @@
         </div>
     </form>
 
-    <!-- example search box1 ends here -->
-
     {% if searched %}
 
     <h2>
@@ -258,7 +251,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <a href="https://twitter.com/{{item.user.screen_name}}/photo">
+                        <a href="https://twitter.com/{{item.user.screen_name}}">
                             <img class="card-img-top" src="{{item.user.profile_image_url}}">
                         </a>
                         <div class="usr-name">
@@ -289,47 +282,6 @@
         {% endfor %}
     </div>
 
-    {% else %}
-
-    <!-- <h2>
-        You Forgot To Type What To Search!!!
-    </h2> -->
-
     {% endif %}
 
 </body>
-
-
-<!-- example search box2 starts here -->
-
-<!-- <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        input[type=text] {
-            width: 130px;
-            box-sizing: border-box;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            background-color: white;
-            background-repeat: no-repeat;
-            padding: 12px 20px 12px;
-            -webkit-transition: width 0.4s ease-in-out;
-            transition: width 0.4s ease-in-out;
-        }
-
-        input[type=text]:focus {
-            width: 95%;
-        }
-    </style>
-</head>
-
-<body>
-
-    <form>
-        <i class="fa fa-search"></i> <input type="text" name="search" placeholder="Search Tweet..">
-    </form>
-
-</body> -->
-
-<!-- example search box1 ends here -->
