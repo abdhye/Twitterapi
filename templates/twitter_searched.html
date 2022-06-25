@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+</head>
+
+<style>
+    body {
+        font-family: Arial;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 1.8rem;
+    }
+
+    img.card-img-top {
+        width: 75px;
+        border-radius: 50%;
+    }
+
+    .card-col {
+        padding: 0px 0px 5px 15px
+    }
+
+    .usr-name {
+        margin-left: 5px;
+    }
+
+    .card-title {
+        font-size: 1rem;
+        margin-bottom: 1.6px;
+    }
+
+    .card-subtitle {
+        margin-bottom: 2px;
+    }
+
+    .text-muted {
+        font-size: 0.8rem;
+    }
+
+    p.card-text {
+        margin-top: 10px;
+    }
+</style>
+
+{% extends "twitter_cover.html" %}
+
+<body>
+
+    {% block content %}
+
+    {% if searched %}
+
+    <h2>
+        Search Results For <b>{{searched}}</b>:
+        <br />
+    </h2>
+
+    <div class="row" style="padding: 10px">
+        {% for item in data %}
+
+        <div class="col-lg-6 col-md-12 col-sm-12 card-col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <a target="_blank" href="https://twitter.com/{{item.user.screen_name}}/photo">
+                            <img class="card-img-top" src="{{item.user.profile_image_url}}" />
+                        </a>
+                        <div class="usr-name">
+                            <h4 class="card-title">{{ item.user.name }}</h4>
+                            <a target="_blank" href="https://twitter.com/{{item.user.screen_name}}" class="card-subtitle text-muted">
+                                @{{ item.user.screen_name }}</a>
+                            <br />
+                            <a target="_blank" href="https://twitter.com/{{item.user.screen_name}}/following"
+                                class="text-muted">{{item.user.friends_count}} <b>Following</b></a>
+                            <a target="_blank" href="https://twitter.com/{{item.user.screen_name}}/followers"
+                                class="text-muted">{{item.user.followers_count}} <b>Followers</b></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="card-text"><b>Tweet:</b> {{ item.text }}</p>
+                    </div>
+                    <div class="row">
+                        <p><b>Tweeted At:</b> {{item.created_at}}</p>
+                    </div>
+                    <div class="row">
+                        <a target="_blank" href="https://twitter.com/{{item.user.screen_name}}/status/{{item.id}}"
+                            class="btn btn-primary">See
+                            Tweet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
+    {% endblock %}
+
+</body>
+
+</html>

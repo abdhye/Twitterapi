@@ -1,287 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
-    <title>Twitter Api</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-
-    <style>
-        body {
-            font-family: Arial;
-            overflow: scroll;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        .slct-count-col {
-            display: flex;
-            flex-direction: row-reverse;
-        }
-
-        .count-input {
-            width: 62%;
-            height: 42px;
-            margin-left: 28px;
-            padding: 5px;
-            border-radius: 5px;
-            border: 1px solid grey;
-        }
-
-        .srchbtn-col {
-            padding-left: 0px;
-            padding-right: 0px;
-            display: flex;
-            flex-direction: row;
-        }
-
-        form {
-            margin-top: 10px;
-        }
-
-        form.example .srch-input[type=search] {
-            padding: 10px;
-            margin-right: 5px;
-            margin-left: 5%;
-            font-size: 17px;
-            border: 1px solid grey;
-            border-radius: 5px;
-            float: left;
-            width: 50%;
-            height: 42px;
-            background: #f1f1f1;
-        }
-
-        form.example .srch-btn {
-            float: left;
-            width: 10%;
-            height: 42px;
-            font-size: 20px;
-            border-radius: 5px;
-            border-left: none;
-            cursor: pointer;
-            margin-right: 5px;
-        }
-
-        form.example::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-
-        .custom-select {
-            max-width: 60%;
-            height: 43px;
-            border-radius: 5px;
-            border: 1px solid grey;
-            height: 42px;
-        }
-
-        .mb-3 {
-            justify-content: end;
-        }
-
-        .slct-prj {
-            width: 40%;
-        }
-
-        button.btn.dropdown-toggle.btn-light {
-            height: 42px;
-            padding: 8px;
-            margin-left: 6px;
-            border-radius: 5px;
-            border: 1px solid grey;
-        }
-
-        .card-col {
-            max-width: 48%;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 1.8rem;
-        }
-
-        img.card-img-top {
-            width: 75px;
-            border-radius: 50%;
-        }
-
-        .usr-name {
-            margin-left: 5px;
-        }
-
-        .card-title {
-            font-size: 1rem;
-            margin-bottom: 1.6px;
-        }
-
-        .card-subtitle {
-            margin-bottom: 2px;
-        }
-
-        .text-muted {
-            font-size: 0.8rem;
-        }
-
-        p.card-text {
-            margin-top: 10px;
-        }
-    </style>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
+
+
+<style>
+    .container {
+        margin-top: 10px;
+    }
+
+    button {
+        border: 0px;
+        background-color: white;
+    }
+
+    .card {
+        width: 18rem;
+    }
+
+    .card-img-top {
+        height: 240px;
+    }
+
+    .card-title {
+        text-align: center;
+    }
+
+    .twt-title {
+        color: #3C73C0;
+    }
+
+    .mar-title {
+        color: #EF1223;
+    }
+</style>
+
 
 <body>
 
-    <form class="example" method="post" action="{% url 'search-twt' %}">
+    <div class="container">
         <div class="row">
-            {% csrf_token %}
-            <div class="col-4 slct-count-col" style="padding-right: 5px;">
-                <input class="count-input" type="number" min="1" max="50" placeholder="No. of tweets(max 50)" value="10"
-                    name="twtcount">
-                <div class="input-group mb-3">
-                    <select class="custom-select" id="inputGroupSelect02" name="filter">
-                        <option value="mixed">Mixed</option>
-                        <option value="recent">Recent</option>
-                        <option value="popular">Popular</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-6 srchbtn-col">
-                <input class="srch-input" type="search" placeholder="Search Tweets.." name="searched">
-                <button class="btn btn-primary srch-btn" type="submit"><i class="fa fa-search"></i></button>
-                <div class="input-group slct-prj">
-                    <select class="selectpicker" id="cryptop" multiple="multiple" name="cryptop">
 
-                        <option value="metahero">metahero</option>
-                        <option value="shiba">shiba</option>
-                        <option value="bnb">bnb</option>
-                        <option value="doge">doge</option>
-                        <option value="solana">solana</option>
-                        <option value="dot">dot</option>
-                        <option value="safemoon">safemoon</option>
-                        <option value="coti">coti</option>
-                        <option value="matic">matic</option>
-                        <option value="bittorrent">bittorrent</option>
-                        <option value="atom">atom</option>
-                        <option value="vet">vet</option>
-                        <option value="million">million</option>
-                        <option value="chz">chz</option>
-                        <option value="uni">uni</option>
-                        <option value="mbox">mbox</option>
-                        <option value="link">link</option>
-                        <option value="twt">twt</option>
-                        <option value="bat">bat</option>
-                        <option value="fil">fil</option>
-                        <option value="aergo">aergo</option>
-                        <option value="iotx">iotx</option>
-                    </select>
-                    <script>
-                        $(document).ready(function () {
-                            /*console.log("hello")*/
-                            /*  $(function () {
-                                  $cryptop = $('#cryptop');
-                                  $cryptop.select();
-                              });
-
-                                $('#cryptop').on('change', function (e) {
-                                console.log($('.filter-option-inner-inner').text());
-                                $('.hidden-input-dropdown').val($('.filter-option-inner-inner').text())
-                            });
-
-
-                             $('.selectpicker').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-                                var selected = $(e.currentTarget).val();
-                                console.log($(selected));
-
-                            });
-                            */
-
-                            $('.selectpicker').on('change', function () {
-                                var selected = []; //array to store value
-                                $(this).find("option:selected").each(function (key, value) {
-                                    selected.push(value.innerHTML); //push the text to array
-
-                                });
-                            });
-
-
-
-
-
-                        });
-                    </script>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    {% if searched %}
-
-    <h2>
-        Search Results For {{searched}}:
-        <br>
-    </h2>
-
-    <div class="row" style="padding: 10px">
-        {% for item in data %}
-
-        <div class="col-6 card-col" style="padding: 10px 0px 2px 15px">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <a href="https://twitter.com/{{item.user.screen_name}}">
-                            <img class="card-img-top" src="{{item.user.profile_image_url}}">
-                        </a>
-                        <div class="usr-name">
-                            <h4 class="card-title">{{ item.user.name }}
-                            </h4>
-                            <a href="https://twitter.com/{{item.user.screen_name}}" class="card-subtitle text-muted">
-                                @{{ item.user.screen_name }}</a> <br>
-                            <a href="https://twitter.com/{{item.user.screen_name}}/following"
-                                class="text-muted">{{item.user.friends_count}} <b>Following</b></a>
-                            <a href="https://twitter.com/{{item.user.screen_name}}/followers"
-                                class="text-muted">{{item.user.followers_count}} <b>Followers</b></a>
+            <div class="col-md-6 col-sm-6 col-sm-12">
+                <form action="{% url 'goto-twitter' %}">
+                    <button>
+                        <div class="card">
+                            <img src="/static/imgs/twt-logo.png" class="card-img-top" alt="twtlogo">
+                            <div class="card-body">
+                                <h5 class="card-title twt-title">Twitter</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <p class="card-text"><b>Tweet:</b> {{ item.text }}</p>
-                    </div>
-                    <div class="row">
-                        <p><b>Tweeted At:</b> {{item.created_at}}</p>
-                    </div>
-                    <div class="row">
-                        <a href="https://twitter.com/{{item.user.screen_name}}/status/{{item.id}}"
-                            class="btn btn-primary">See Tweet</a>
-                    </div>
-                </div>
+                    </button>
+                </form>
             </div>
-        </div>
 
-        {% endfor %}
+            <div class="col-md-6 col-sm-6 col-sm-12">
+                <form action="{% url 'goto-marvel-coverpage' %}">
+                    <button>
+                        <div class="card">
+                            <img src="/static/imgs/marvel-logo.jpeg" class="card-img-top" alt="marvellogo">
+                            <div class="card-body">
+                                <h5 class="card-title mar-title">Marvel</h5>
+                            </div>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+        </div>
     </div>
 
-    {% endif %}
-
 </body>
+
+
+</html>

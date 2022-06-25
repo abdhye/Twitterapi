@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<style>
+    .container {
+        padding: 20px;
+    }
+
+    button {
+        border: 0px;
+        background-color: white;
+    }
+
+    .card {
+        width: 18rem;
+    }
+
+    .card-img-top {
+        height: 240px;
+    }
+
+    .card-title {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-6 col-sm-12">
+                <form action="{% url 'goto-mar-charpage' %}">
+                    <button>
+                        <div class="card">
+                            <img src="/static/imgs/characters-img.jpg" class="card-img-top" alt="chacs-img">
+                            <div class="card-body">
+                                <h5 class="card-title">Characters</h5>
+                            </div>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-sm-12">
+                <form action="{% url 'goto-mar-comicspage' %}">
+                    <button>
+                        <div class="card">
+                            <img src="/static/imgs/comics-img.jpg" class="card-img-top" alt="coms-img">
+                            <div class="card-body">
+                                <h5 class="card-title">Comics</h5>
+                            </div>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
